@@ -1,0 +1,2 @@
+# superstore
+Categorical data generator
