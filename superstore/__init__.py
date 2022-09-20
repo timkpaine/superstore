@@ -6,7 +6,7 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
-from ._version import __version__
+__version__ = "0.1.0"
 
 import pandas as pd
 import finance_enums
