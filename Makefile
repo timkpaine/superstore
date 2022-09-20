@@ -7,6 +7,10 @@ lint: ## run linter
 fix:  ## run black fix
 	python -m black superstore/ setup.py
 
+check:  ## run manifest checks
+	check-manifest -v
+
+
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf 
 	find . -name "*.pyc" | xargs rm -rf 
@@ -34,4 +38,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: tests lint fix clean install dev dist publish help
+.PHONY: tests lint fix check clean install dev dist publish help

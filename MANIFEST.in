@@ -4,7 +4,6 @@ include README.md
 
 include setup.cfg
 include pyproject.toml
-include .bumpversion.cfg
 include Makefile
 
 graft superstore/tests
@@ -16,3 +15,5 @@ global-exclude *.pyo
 global-exclude .git
 global-exclude .ipynb_checkpoints
 global-exclude .DS_Store
+
+exclude CONTRIBUTING.md
