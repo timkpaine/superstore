@@ -39,7 +39,7 @@ requires_dev = requires + [
 
 setup(
     name=name,
-    version="0.1.1",
+    version="0.1.2",
     description="Categorical data generator",
     long_description=long_description,
     long_description_content_type="text/markdown",
