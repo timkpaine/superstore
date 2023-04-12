@@ -27,7 +27,7 @@ requires = [
 ]
 
 requires_dev = requires + [
-    "black>=20.",
+    "black>=22",
     "bump2version>=1.0.0",
     "check-manifest",
     "flake8>=3.7.8",
