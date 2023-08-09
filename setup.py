@@ -22,7 +22,7 @@ with open(pjoin(here, "README.md"), encoding="utf-8") as f:
 
 requires = [
     "Faker>=1.0.1",
-    "finance-enums>=0.1.0",
+    "finance-enums>=0.1.0,<0.2",
     "pandas>=0.23.4",
 ]
 
