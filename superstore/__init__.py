@@ -6,5 +6,5 @@
 # the Apache License 2.0.  The full license can be found in the LICENSE file.
 #
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 from .superstore import superstore, employees
