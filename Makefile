@@ -1,6 +1,8 @@
 tests: ## Make unit tests
 	python -m pytest -v superstore --cov=superstore --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
+test: tests
+
 lint: ## run linter
 	python -m flake8 superstore setup.py
 
@@ -9,7 +11,6 @@ fix:  ## run black fix
 
 check:  ## run manifest checks
 	check-manifest -v
-
 
 clean: ## clean the repository
 	find . -name "__pycache__" | xargs  rm -rf 
@@ -38,4 +39,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: tests lint fix check clean install dev dist publish help
+.PHONY: test tests lint fix check clean install dev dist publish help

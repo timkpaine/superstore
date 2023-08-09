@@ -26,9 +26,12 @@ def superstore(count=1000):
         dat["Postal Code"] = fake.zipcode()
         dat["Region"] = choice(["Region %d" % i for i in range(5)])
         dat["Product ID"] = fake.bban()
-        sector = choice(list(finance_enums.US_SECTORS))
-        industry = choice(list(finance_enums.US_SECTORS_MAP[sector]))
-        dat["Category"] = sector
+        while (
+            sector := choice(list(finance_enums.Sector.__members__.values()))
+        ) == finance_enums.Sector.Invalid:
+            ...
+        industry = choice(finance_enums.Sector.industry_groups(sector))
+        dat["Category"] = sector.name()
         dat["Sub-Category"] = industry
         dat["Sales"] = randint(1, 100) * 100
         dat["Quantity"] = randint(1, 100) * 10
