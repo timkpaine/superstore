@@ -1,7 +1,7 @@
 import pandas as pd
-import finance_enums
 from faker import Faker
 from random import random, randint, choice
+from .utils import US_SECTORS, US_SECTORS_MAP
 
 fake = Faker()
 
@@ -13,9 +13,7 @@ def superstore(count=1000):
         dat["Row ID"] = id
         dat["Order ID"] = fake.ein()
         dat["Order Date"] = fake.date_this_year()
-        dat["Ship Date"] = fake.date_between_dates(dat["Order Date"]).strftime(
-            "%Y-%m-%d"
-        )
+        dat["Ship Date"] = fake.date_between_dates(dat["Order Date"]).strftime("%Y-%m-%d")
         dat["Order Date"] = dat["Order Date"].strftime("%Y-%m-%d")
         dat["Ship Mode"] = choice(["First Class", "Standard Class", "Second Class"])
         dat["Customer ID"] = fake.license_plate()
@@ -26,8 +24,8 @@ def superstore(count=1000):
         dat["Postal Code"] = fake.zipcode()
         dat["Region"] = choice(["Region %d" % i for i in range(5)])
         dat["Product ID"] = fake.bban()
-        sector = choice(list(finance_enums.US_SECTORS))
-        industry = choice(list(finance_enums.US_SECTORS_MAP[sector]))
+        sector = choice(list(US_SECTORS))
+        industry = choice(list(US_SECTORS_MAP[sector]))
         dat["Category"] = sector
         dat["Sub-Category"] = industry
         dat["Sales"] = randint(1, 100) * 100

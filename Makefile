@@ -2,18 +2,17 @@ tests: ## Make unit tests
 	python -m pytest -v superstore --cov=superstore --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
 lint: ## run linter
-	python -m flake8 superstore setup.py
+	python -m ruff superstore setup.py
 
 fix:  ## run black fix
-	python -m black superstore/ setup.py
+	python -m ruff format superstore/ setup.py
 
 check:  ## run manifest checks
 	check-manifest -v
 
-
 clean: ## clean the repository
-	find . -name "__pycache__" | xargs  rm -rf 
-	find . -name "*.pyc" | xargs rm -rf 
+	find . -name "__pycache__" | xargs  rm -rf
+	find . -name "*.pyc" | xargs rm -rf
 	rm -rf .coverage cover htmlcov logs build dist *.egg-info
 
 install:  ## install to site-packages
@@ -26,7 +25,7 @@ dist:  ## create dists
 	rm -rf dist build
 	python setup.py sdist bdist_wheel
 	python -m twine check dist/*
-	
+
 publish: dist  ## dist to pypi
 	python -m twine upload dist/* --skip-existing
 
