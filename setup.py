@@ -1,11 +1,3 @@
-# *****************************************************************************
-#
-# Copyright (c) 2021, the superstore authors.
-#
-# This file is part of the superstore library, distributed under the terms of
-# the Apache License 2.0.  The full license can be found in the LICENSE file.
-#
-
 import os
 import os.path
 from codecs import open
@@ -22,19 +14,15 @@ with open(pjoin(here, "README.md"), encoding="utf-8") as f:
 
 requires = [
     "Faker>=1.0.1",
-    "finance-enums>=0.1.0,<0.2",
     "pandas>=0.23.4",
 ]
 
 requires_dev = requires + [
-    "black>=22",
     "bump2version>=1.0.0",
     "check-manifest",
-    "flake8>=3.7.8",
-    "flake8-black>=0.2.1",
+    "ruff>=0.1.4",
     "pytest>=4.3.0",
     "pytest-cov>=2.6.1",
-    "pytest-rerunfailures>=10.1",
 ]
 
 setup(
