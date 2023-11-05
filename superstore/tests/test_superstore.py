@@ -1,7 +1,8 @@
 class TestSuperstore:
     def test_superstore(self):
-        from superstore.superstore import superstore, employees
         import pandas as pd
+
+        from superstore import employees, superstore
 
         df = superstore()
         assert isinstance(df, pd.DataFrame)
