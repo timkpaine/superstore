@@ -1,6 +1,8 @@
+from random import choice, randint, random
+
 import pandas as pd
 from faker import Faker
-from random import random, randint, choice
+
 from .utils import US_SECTORS, US_SECTORS_MAP
 
 fake = Faker()
