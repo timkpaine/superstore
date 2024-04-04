@@ -2,7 +2,7 @@ tests: ## Make unit tests
 	python -m pytest -v superstore --cov=superstore --junitxml=python_junit.xml --cov-report=xml --cov-branch
 
 lint: ## run linter
-	python -m ruff superstore setup.py
+	python -m ruff check superstore setup.py
 
 fix:  ## run black fix
 	python -m ruff format superstore/ setup.py

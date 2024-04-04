@@ -20,7 +20,7 @@ requires = [
 requires_dev = requires + [
     "bump2version>=1.0.0",
     "check-manifest",
-    "ruff>=0.1.4",
+    "ruff>=0.3,<0.4",
     "pytest>=4.3.0",
     "pytest-cov>=2.6.1",
 ]
