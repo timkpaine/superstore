@@ -54,7 +54,7 @@ def makeTimeSeries(nper=None, freq="B", name=None) -> Series:
     if nper is None:
         nper = _N
     return Series(
-        np.random.default_rng(2).standard_normal(nper),
+        np.random.normal(0.2, 1, nper).cumsum(),
         index=makeDateIndex(nper, freq=freq),
         name=name,
     )
