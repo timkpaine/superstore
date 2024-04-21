@@ -104,3 +104,5 @@ ENV/
 *.ipyhistory
 python_junit.xml
 .vscode
+*.ipynb
+

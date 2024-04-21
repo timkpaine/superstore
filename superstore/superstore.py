@@ -7,6 +7,11 @@ from .utils import US_SECTORS, US_SECTORS_MAP
 
 fake = Faker()
 
+__all__ = (
+    "superstore",
+    "employees",
+)
+
 
 def superstore(count=1000):
     data = []

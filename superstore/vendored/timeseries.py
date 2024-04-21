@@ -39,6 +39,11 @@ from pandas import DataFrame, DatetimeIndex, Series, bdate_range
 _N = 30
 _K = 4
 
+__all__ = (
+    "getTimeSeries",
+    "getTimeSeriesData",
+)
+
 
 def getCols(k) -> str:
     return string.ascii_uppercase[:k]
