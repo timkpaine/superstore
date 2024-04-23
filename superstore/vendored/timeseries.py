@@ -35,9 +35,6 @@ import string
 from datetime import datetime
 from pandas import DataFrame, DatetimeIndex, Series, bdate_range
 
-_N = 30
-_K = 4
-
 __all__ = (
     "getTimeSeries",
     "getTimeSeriesData",
@@ -54,9 +51,7 @@ def makeDateIndex(k: int = 10, freq="B", name=None, **kwargs) -> DatetimeIndex:
     return DatetimeIndex(dr, name=name, **kwargs)
 
 
-def makeTimeSeries(nper=None, freq="B", name=None) -> Series:
-    if nper is None:
-        nper = _N
+def makeTimeSeries(nper=30, freq="B", name=None) -> Series:
     return Series(
         np.random.normal(0.2, 1, nper).cumsum(),
         index=makeDateIndex(nper, freq=freq),
@@ -64,9 +59,9 @@ def makeTimeSeries(nper=None, freq="B", name=None) -> Series:
     )
 
 
-def getTimeSeriesData(nper=None, freq="B") -> dict[str, Series]:
-    return {c: makeTimeSeries(nper, freq) for c in getCols(_K)}
+def getTimeSeriesData(nper=30, freq="B", ncol=4) -> dict[str, Series]:
+    return {c: makeTimeSeries(nper, freq) for c in getCols(ncol)}
 
 
-def getTimeSeries(nper=None, freq="B") -> DataFrame:
-    return DataFrame(getTimeSeriesData(nper=nper, freq=freq))
+def getTimeSeries(nper=30, freq="B", ncol=4) -> DataFrame:
+    return DataFrame(getTimeSeriesData(nper=nper, freq=freq, ncol=ncol))
