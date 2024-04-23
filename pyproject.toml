@@ -1,8 +1,77 @@
 [build-system]
 requires = ["setuptools", "wheel"]
 
+[project]
+name = "superstore"
+description = "Data generation"
+version = "0.2.1"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+authors = [
+    { name = "Tim Paine", email = "t.paine154@gmail.com" },
+]
+keywords = [
+    "Jupyter",
+    "JupyterLab",
+    "Notebook",
+    "Notebooks",
+    "Report",
+    "Reports",
+    "Reporting",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License",
+]
+
+dependencies = [
+    "coolname",
+    "Faker>=1.0.1",
+    "pandas>=0.23.4",
+]
+
+[project.optional-dependencies]
+develop = [
+    "check-manifest",
+    "isort>=5,<6",
+    "ruff>=0.3,<0.4",
+    # test
+    "pytest",
+    "pytest-cov",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+[project.urls]
+repository = "https://github.com/timkpaine/superstore"
+homepage = "https://github.com/timkpaine/superstore"
+
+[tool.isort]
+combine_as_imports = true
+include_trailing_comma = true
+line_length = 150
+profile = "black"
+
+default_section = "THIRDPARTY"
+sections = "FUTURE,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+
+known_first_party = "superstore"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = "superstore/tests"
+
 [tool.ruff]
-line-length = 120
+line-length = 150
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]
+"__init__.py" = ["F401", "F403"]

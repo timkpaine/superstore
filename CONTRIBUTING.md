@@ -28,11 +28,11 @@ If you want to help resolve an issue by making some changes that are larger than
 - Fork the repository on Github
 - Clone your fork to your computer
 - Run the following commands inside the cloned repository:
-  - `pip install -e .[dev]` - This will install the Python package in development
+  - `pip install -e .[develop]` - This will install the Python package in development
     mode.
 - Validate the install by running the tests:
-  - `py.test` - This command will run the Python tests.
-  - `flake8 superstore` - This command will run the Python linters.
+  - `make test` - This command will run the Python tests.
+  - `make lint` - This command will run the Python linters.
 
 Once you have such a development setup, you should:
 

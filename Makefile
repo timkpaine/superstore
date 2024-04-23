@@ -1,10 +1,13 @@
 tests: ## Make unit tests
 	python -m pytest -v superstore --cov=superstore --junitxml=python_junit.xml --cov-report=xml --cov-branch
+test: tests # alias
 
 lint: ## run linter
+	python -m isort --check superstore setup.py
 	python -m ruff check superstore setup.py
 
 fix:  ## run black fix
+	python -m isort superstore/ setup.py
 	python -m ruff format superstore/ setup.py
 
 check:  ## run manifest checks
@@ -19,7 +22,8 @@ install:  ## install to site-packages
 	python -m pip install .
 
 dev:
-	python -m pip install .[dev]
+	python -m pip install .[develop]
+develop: dev # alias
 
 dist:  ## create dists
 	rm -rf dist build
@@ -37,4 +41,4 @@ help:
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: tests lint fix check clean install dev dist publish help
+.PHONY: tests test lint fix check clean install dev dist publish help
