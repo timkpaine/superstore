@@ -22,7 +22,8 @@ install:  ## install to site-packages
 	python -m pip install .
 
 dev:
-	python -m pip install .[dev]
+	python -m pip install .[develop]
+develop: dev # alias
 
 dist:  ## create dists
 	rm -rf dist build
