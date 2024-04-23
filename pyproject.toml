@@ -32,6 +32,7 @@ classifiers = [
 ]
 
 dependencies = [
+    "coolname",
     "Faker>=1.0.1",
     "pandas>=0.23.4",
 ]
