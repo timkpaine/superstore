@@ -2,9 +2,9 @@ graft superstore
 include LICENSE
 include README.md
 
-include setup.cfg
 include pyproject.toml
-include Makefile
+exclude .bumpversion.cfg
+exclude Makefile
 
 graft superstore/tests
 
