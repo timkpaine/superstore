@@ -5,6 +5,7 @@ test: tests # alias
 lint: ## run linter
 	python -m isort --check superstore setup.py
 	python -m ruff check superstore setup.py
+	python -m ruff format --check superstore setup.py
 
 fix:  ## run black fix
 	python -m isort superstore/ setup.py
