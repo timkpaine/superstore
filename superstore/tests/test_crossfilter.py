@@ -41,20 +41,29 @@ class TestCrossfilters:
         }
         assert STATUS_SCHEMA == {
             "machine_id": str,
-            "status": str,
-            "last_update": datetime,
-        }
-        assert USAGE_SCHEMA == {
-            "machine_id": str,
+            "kind": str,
+            "cores": int,
+            "region": str,
+            "zone": str,
             "cpu": float,
             "mem": float,
             "free": float,
             "network": float,
             "disk": float,
+            "status": str,
+            "last_update": datetime,
+        }
+        assert USAGE_SCHEMA == {
+            "machine_id": str,
             "kind": str,
             "cores": int,
             "region": str,
             "zone": str,
+            "cpu": float,
+            "mem": float,
+            "free": float,
+            "network": float,
+            "disk": float,
         }
 
     def test_machines(self):
