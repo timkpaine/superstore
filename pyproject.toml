@@ -41,8 +41,9 @@ dependencies = [
 develop = [
     "check-manifest",
     "isort>=5,<6",
-    "ruff>=0.3,<0.4",
+    "ruff>=0.3,<0.5",
     # test
+    "csp",
     "pytest",
     "pytest-cov",
 ]

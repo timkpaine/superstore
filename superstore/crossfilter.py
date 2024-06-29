@@ -1,7 +1,6 @@
 from coolname import generate as generateName
 from datetime import datetime, timedelta
 from random import choice, randint, random
-from types import MappingProxyType
 from uuid import uuid4
 
 _MACHINE_TYPES = ("edge", "core", "worker")
@@ -24,16 +23,14 @@ def _id():
     return str(uuid4()).rsplit("-", 1)[-1]
 
 
-MACHINE_SCHEMA = MappingProxyType(
-    {
-        "machine_id": str,
-        # "name": common name
-        "kind": str,
-        "cores": int,
-        "region": str,
-        "zone": str,
-    }
-)
+MACHINE_SCHEMA = {
+    "machine_id": str,
+    # "name": common name
+    "kind": str,
+    "cores": int,
+    "region": str,
+    "zone": str,
+}
 
 
 def machines(count: int = 100):
@@ -74,16 +71,14 @@ def machines(count: int = 100):
     return ret
 
 
-_USAGE_SCHEMA = {
-    "machine_id": str,
+USAGE_SCHEMA = {
     "cpu": float,
     "mem": float,
     "free": float,
     "network": float,
     "disk": float,
 }
-_USAGE_SCHEMA.update(MACHINE_SCHEMA)
-USAGE_SCHEMA = MappingProxyType(_USAGE_SCHEMA)
+USAGE_SCHEMA.update(MACHINE_SCHEMA)
 
 
 def _clip(value, value_min, value_max):
@@ -147,13 +142,11 @@ def usage(machine):
     return ret
 
 
-STATUS_SCHEMA = MappingProxyType(
-    {
-        "machine_id": str,
-        "status": str,
-        "last_update": datetime,
-    }
-)
+STATUS_SCHEMA = {
+    "status": str,
+    "last_update": datetime,
+}
+STATUS_SCHEMA.update(USAGE_SCHEMA)
 
 
 def status(machine):
@@ -180,16 +173,14 @@ def status(machine):
     return ret
 
 
-JOBS_SCHEMA = MappingProxyType(
-    {
-        "machine_id": str,
-        "job_id": str,
-        "name": str,
-        "units": int,
-        "start_time": datetime,
-        "end_time": datetime,
-    }
-)
+JOBS_SCHEMA = {
+    "machine_id": str,
+    "job_id": str,
+    "name": str,
+    "units": int,
+    "start_time": datetime,
+    "end_time": datetime,
+}
 
 
 def jobs(machine):
