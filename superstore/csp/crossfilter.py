@@ -15,14 +15,18 @@ from ..crossfilter import (
 )
 
 __all__ = (
-    "MACHINE_SCHEMA",
-    "USAGE_SCHEMA",
-    "STATUS_SCHEMA",
-    "JOBS_SCHEMA",
     "machines",
+    "Machine",
+    "MACHINE_SCHEMA",
     "usage",
+    "Usage",
+    "USAGE_SCHEMA",
     "status",
+    "Status",
+    "STATUS_SCHEMA",
     "jobs",
+    "Job",
+    "JOBS_SCHEMA",
 )
 
 
