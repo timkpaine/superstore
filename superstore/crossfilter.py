@@ -24,12 +24,12 @@ def _id():
 
 
 MACHINE_SCHEMA = {
-    "machine_id": str,
+    "machine_id": "string",
     # "name": common name
-    "kind": str,
-    "cores": int,
-    "region": str,
-    "zone": str,
+    "kind": "string",
+    "cores": "integer",
+    "region": "string",
+    "zone": "string",
 }
 
 
@@ -72,11 +72,11 @@ def machines(count: int = 100):
 
 
 USAGE_SCHEMA = {
-    "cpu": float,
-    "mem": float,
-    "free": float,
-    "network": float,
-    "disk": float,
+    "cpu": "float",
+    "mem": "float",
+    "free": "float",
+    "network": "float",
+    "disk": "float",
 }
 USAGE_SCHEMA.update(MACHINE_SCHEMA)
 
@@ -143,8 +143,8 @@ def usage(machine):
 
 
 STATUS_SCHEMA = {
-    "status": str,
-    "last_update": datetime,
+    "status": "string",
+    "last_update": "datetime",
 }
 STATUS_SCHEMA.update(USAGE_SCHEMA)
 
@@ -174,12 +174,12 @@ def status(machine):
 
 
 JOBS_SCHEMA = {
-    "machine_id": str,
-    "job_id": str,
-    "name": str,
-    "units": int,
-    "start_time": datetime,
-    "end_time": datetime,
+    "machine_id": "string",
+    "job_id": "string",
+    "name": "string",
+    "units": "integer",
+    "start_time": "datetime",
+    "end_time": "datetime",
 }
 
 
