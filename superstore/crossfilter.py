@@ -24,16 +24,16 @@ def _id():
 
 
 MACHINE_SCHEMA = {
-    "machine_id": str,
+    "machine_id": "string",
     # "name": common name
-    "kind": str,
-    "cores": int,
-    "region": str,
-    "zone": str,
+    "kind": "string",
+    "cores": "integer",
+    "region": "string",
+    "zone": "string",
 }
 
 
-def machines(count: int = 100):
+def machines(count: int = 100, *, json=False):
     """Generate data representing different kinds of machines.
 
     Machines have the following fields:
@@ -72,11 +72,11 @@ def machines(count: int = 100):
 
 
 USAGE_SCHEMA = {
-    "cpu": float,
-    "mem": float,
-    "free": float,
-    "network": float,
-    "disk": float,
+    "cpu": "float",
+    "mem": "float",
+    "free": "float",
+    "network": "float",
+    "disk": "float",
 }
 USAGE_SCHEMA.update(MACHINE_SCHEMA)
 
@@ -89,7 +89,7 @@ def _randrange(low, high):
     return (random() * (high - low)) + low
 
 
-def usage(machine):
+def usage(machine, *, json=False):
     """Generate usage information based on type of machine
 
     Fields:
@@ -143,13 +143,13 @@ def usage(machine):
 
 
 STATUS_SCHEMA = {
-    "status": str,
-    "last_update": datetime,
+    "status": "string",
+    "last_update": "datetime",
 }
 STATUS_SCHEMA.update(USAGE_SCHEMA)
 
 
-def status(machine):
+def status(machine, *, json=False):
     """Generate status information based on type of machine
 
     Fields:
@@ -158,7 +158,7 @@ def status(machine):
       last_update: datetime
     """
     ret = machine.copy()
-    ret["last_update"] = datetime.utcnow()
+    ret["last_update"] = datetime.utcnow().isoformat() if json else datetime.utcnow()
 
     if machine.get("cpu", None) is None:
         ret["status"] = "unknown"
@@ -174,16 +174,16 @@ def status(machine):
 
 
 JOBS_SCHEMA = {
-    "machine_id": str,
-    "job_id": str,
-    "name": str,
-    "units": int,
-    "start_time": datetime,
-    "end_time": datetime,
+    "machine_id": "string",
+    "job_id": "string",
+    "name": "string",
+    "units": "integer",
+    "start_time": "datetime",
+    "end_time": "datetime",
 }
 
 
-def jobs(machine):
+def jobs(machine, *, json=False):
     """Generate job information based on type of machine
     Fields:
       machine_id
@@ -198,12 +198,15 @@ def jobs(machine):
     if random() < 0.5:
         return
 
+    start = datetime.utcnow()
+    end = datetime.utcnow() + timedelta(seconds=randint(0, 400))
+
     ret = {
         "machine_id": machine["machine_id"],
         "job_id": _id(),
         "name": "-".join(generateName(2)),
         "units": choice((1, 2, 4, 8)),
-        "start_time": datetime.utcnow(),
-        "end_time": datetime.utcnow() + timedelta(seconds=randint(0, 400)),
+        "start_time": start.isoformat() if json else start,
+        "end_time": end.isoformat() if json else end,
     }
     return ret
