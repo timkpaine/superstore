@@ -1,7 +1,8 @@
-import csp
-from csp import ts
 from datetime import datetime, timedelta
 from typing import List
+
+import csp
+from csp import ts
 
 from ..crossfilter import (
     JOBS_SCHEMA,
