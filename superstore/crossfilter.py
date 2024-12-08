@@ -1,7 +1,8 @@
-from coolname import generate as generateName
 from datetime import datetime, timedelta
 from random import choice, randint, random
 from uuid import uuid4
+
+from coolname import generate as generateName
 
 _MACHINE_TYPES = ("edge", "core", "worker")
 _REGIONS = ("na", "eu", "ap")

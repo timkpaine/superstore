@@ -1,34 +1,27 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["maturin>=1,<2"]
+build-backend = "maturin"
 
 [project]
 name = "superstore"
-description = "Data generation"
-version = "0.2.6"
+authors = [{name = "the superstore authors", email = "3105306+timkpaine@users.noreply.github.com"}]
+description="Data generation"
 readme = "README.md"
-license = { file = "LICENSE" }
-requires-python = ">=3.7"
-authors = [
-    { name = "Tim Paine", email = "t.paine154@gmail.com" },
-]
-keywords = [
-    "Jupyter",
-    "JupyterLab",
-    "Notebook",
-    "Notebooks",
-    "Report",
-    "Reports",
-    "Reporting",
-]
+license = { text = "Apache-2.0" }
+version = "0.2.6"
+requires-python = ">=3.9"
+keywords = []
+
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Programming Language :: Python",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "License :: OSI Approved :: Apache Software License",
 ]
 
 dependencies = [
@@ -37,30 +30,30 @@ dependencies = [
     "pandas>=0.23.4",
 ]
 
+[project.urls]
+Repository = "https://github.com/timkpaine/superstore"
+Homepage = "https://github.com/timkpaine/superstore"
+
 [project.optional-dependencies]
 develop = [
+    "build",
     "bump-my-version",
     "check-manifest",
-    "isort>=5,<6",
-    "ruff>=0.3,<0.5",
-    # test
-    "csp",
+    "cibuildwheel",
+    "maturin>=1,<2",
     "pytest",
     "pytest-cov",
-]
-test = [
-    "pytest",
-    "pytest-cov",
+    "ruff",
+    "twine",
+    "wheel",
 ]
 
-[project.urls]
-repository = "https://github.com/timkpaine/superstore"
-homepage = "https://github.com/timkpaine/superstore"
+[project.scripts]
 
 [tool.bumpversion]
 current_version = "0.2.6"
 commit = true
-tag = false
+tag = true
 
 [[tool.bumpversion.files]]
 filename = "superstore/__init__.py"
@@ -72,23 +65,77 @@ filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
-[tool.isort]
-combine_as_imports = true
-include_trailing_comma = true
-line_length = 150
-profile = "black"
+[[tool.bumpversion.files]]
+filename = "Cargo.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
 
-default_section = "THIRDPARTY"
-sections = "FUTURE,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+[[tool.bumpversion.files]]
+filename = "rust/Cargo.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
 
-known_first_party = "superstore"
+[tool.check-manifest]
+ignore = [
+    ".copier-answers.yml",
+    "Makefile",
+    "setup.py",
+    "docs/**/*",
+    "rust/.config/*",
+    "rust/Cargo.lock",
+    "rust/README.md",
+]
+
+[tool.cibuildwheel]
+before-build = "rustup show"
+build = "cp39-*"
+skip = "*musllinux*"
+test-command = "pytest -vvv {project}/superstore/tests"
+test-requires = ["pytest", "pytest-cov", "pytest-sugar", "pytest-xdist"]
+
+[tool.cibuildwheel.linux]
+before-build = "curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=stable --profile=minimal -y && rustup show"
+environment = {PATH="$HOME/.cargo/bin:$PATH", CARGO_TERM_COLOR="always"}
+archs = "x86_64"
+
+[tool.cibuildwheel.macos]
+archs = "x86_64 arm64"
+environment = {MACOS_DEPLOYMENT_TARGET=11.0}
+
+[tool.cibuildwheel.windows]
+environment = {PATH="$UserProfile\\.cargo\bin;$PATH"}
+archs = "AMD64 x86"
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "superstore/tests/integration/",
+]
+[tool.coverage.report]
+exclude_also = [
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "@(abc\\.)?abstractmethod",
+]
+ignore_errors = true
+fail_under = 50
 
 [tool.pytest.ini_options]
+addopts = ["-vvv", "--junitxml=junit.xml"]
 asyncio_mode = "strict"
 testpaths = "superstore/tests"
 
 [tool.ruff]
 line-length = 150
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+default-section = "third-party"
+known-first-party = ["superstore"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
