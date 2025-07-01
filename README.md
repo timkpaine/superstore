@@ -2,9 +2,9 @@
 
 Categorical data generator
 
-[![Build Status](https://github.com/timkpaine/superstore/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/timkpaine/superstore/actions?query=workflow%3A%22Build+Status%22)
-[![Coverage](https://codecov.io/gh/timkpaine/superstore/branch/main/graph/badge.svg)](https://codecov.io/gh/timkpaine/superstore)
-[![License](https://img.shields.io/github/license/timkpaine/superstore.svg)](https://github.com/timkpaine/superstore)
+[![Build Status](https://github.com/1kbgz/superstore/workflows/Build%20Status/badge.svg?branch=main)](https://github.com/1kbgz/superstore/actions?query=workflow%3A%22Build+Status%22)
+[![Coverage](https://codecov.io/gh/1kbgz/superstore/branch/main/graph/badge.svg)](https://codecov.io/gh/1kbgz/superstore)
+[![License](https://img.shields.io/github/license/1kbgz/superstore.svg)](https://github.com/1kbgz/superstore)
 [![PyPI](https://img.shields.io/pypi/v/superstore.svg)](https://pypi.python.org/pypi/superstore/)
 
 ## Install
