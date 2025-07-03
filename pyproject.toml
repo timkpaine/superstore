@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "superstore"
-authors = [{name = "the superstore authors", email = "3105306+timkpaine@users.noreply.github.com"}]
+authors = [{name = "the superstore authors", email = "dev@1kbgz.com"}]
 description="Data generation"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -30,10 +30,6 @@ dependencies = [
     "pandas>=0.23.4",
 ]
 
-[project.urls]
-Repository = "https://github.com/timkpaine/superstore"
-Homepage = "https://github.com/timkpaine/superstore"
-
 [project.optional-dependencies]
 develop = [
     "build",
@@ -49,6 +45,10 @@ develop = [
 ]
 
 [project.scripts]
+
+[project.urls]
+repository = "https://github.com/1kbgz/superstore"
+homepage = "https://github.com/1kbgz/superstore"
 
 [tool.bumpversion]
 current_version = "0.2.6"
