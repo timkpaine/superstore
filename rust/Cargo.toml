@@ -1,0 +1,22 @@
+[package]
+name = "superstore"
+version = "0.2.6"
+authors = ["the superstore authors <3105306+timkpaine@users.noreply.github.com>"]
+edition = "2021"
+license = "Apache-2.0"
+readme = "../README.md"
+repository = "https://github.com/timkpaine/superstore"
+description = ""
+
+[lib]
+name = "superstore"
+path = "src/lib.rs"
+crate-type = ["rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+
+[profile.test.junit]
+path = "junit.xml"
+
