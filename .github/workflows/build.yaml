@@ -35,39 +35,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions-ext/python/setup@main
       with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-        cache-dependency-path: 'pyproject.toml'
+        version: ${{ matrix.python-version }}
 
-    - name: Set up Rust
-      uses: dtolnay/rust-toolchain@stable
-      with:
-        toolchain: stable
-        components: clippy, rustfmt
-
-    - name: Setup Rust cache
-      uses: Swatinem/rust-cache@v2
-      with:
-        key: ${{ matrix.os }}
-  
-    - name: Setup rust targets (MacOS)
-      run: |
-        rustup toolchain install stable-x86_64-apple-darwin
-        rustup target add x86_64-apple-darwin
-        rustup toolchain install stable-aarch64-apple-darwin
-        rustup target add aarch64-apple-darwin
-      if: matrix.os == 'macos-latest'
-
-    - name: Setup rust targets (Windows)
-      run: |
-        rustup toolchain install stable-x86_64-pc-windows-msvc
-        rustup target add x86_64-pc-windows-msvc
-        rustup toolchain install stable-i686-pc-windows-msvc
-        rustup target add i686-pc-windows-msvc
-      if: matrix.os == 'windows-latest'
+    - uses: actions-ext/rust/setup@main
 
     - name: Install dependencies
       run: make develop
@@ -89,21 +61,25 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-results-${{ matrix.os }}-${{ matrix.python-version }}
-        path: |
-          **/junit.xml
+        path: '**/junit.xml'
       if: ${{ always() }}
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
-        files: |
-            **/junit.xml
+        files: '**/junit.xml'
       if: matrix.os == 'ubuntu-latest'
 
     - name: Upload coverage
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: all
+      if: runner.os == 'Linux' && runner.arch == 'X64'
 
     - name: Make dist
       run: |
